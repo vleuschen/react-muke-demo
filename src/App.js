@@ -1,25 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from 'react-redux';
+import { GloabalStyle } from './style';
+import { Route,BrowserRouter} from 'react-router-dom';
+import { IconFontStyle } from './statics/iconfont/iconfont';
+import Header from './common/header';
+import store from './store';
+
+import Home from './pages/home';
+import Detail from './pages/detail/loadable';
+import Write from './pages/write';
+import Login from './pages/login';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Provider store={store}>
+        <div>
+          <BrowserRouter>
+            <IconFontStyle />
+            <GloabalStyle />
+            <Header />
+            <Route exact path="/" component={Home}></Route>
+            <Route exact path="/login" component={Login}></Route>
+            <Route exact path="/write" component={Write}></Route>
+            <Route exact path="/detail/:id" component={Detail}></Route>
+          </BrowserRouter>
+        </div>
+      </Provider>
     </div>
+    
   );
 }
 
